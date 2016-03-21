@@ -17,32 +17,34 @@
   <div class="container-fluid" style="column-count: 3;">
     <div class="row">
       <div class="col-md-2 no-print">
-        Generate a cheatsheet specific for the technology your team used.<br/>
+        Generate a cheat sheet specific for the technologies your development team used.<br/>
         <br/>
-        <i class="fa fa-code"></i> .NET:<br/>
+        <span class="category"><i class="fa fa-code"></i> .NET:</span><br/>
         <input type="checkbox" ng-model="filter['manualenc']" > Manual encoding<br/>
         <input type="checkbox" ng-model="filter['razor']"> Razor (.cshtml/.vbhtml)<br/>
         <input type="checkbox" ng-model="filter['webforms']"> Web Forms (.aspx)<br/>
         <input type="checkbox" ng-model="filter['sanitizehtml']"> HTML Sanitization<br/>
-        <input type="checkbox" ng-model="filter['sqli']"> SQL<br/>
+        <input type="checkbox" ng-model="filter['sqli']"> SQL - ADO.net<br/>
         <input type="checkbox" ng-model="filter['oscmd']"> OS Command<br/>
         <input type="checkbox" ng-model="filter['ldap']"> LDAP Queries<br/>
-        <input type="checkbox" ng-model="filter['xpath']"> XPath<br/>
+        <input type="checkbox" ng-model="filter['xpath-basic']"> XPath<br/>
+        <input type="checkbox" ng-model="filter['xpath-mvpxml']"> XPath MvpXml<br/>
         <input type="checkbox" ng-model="filter['xxe']"> XML parsing (XXE)<br/>
         <br/>
-        <i class="fa fa-code"></i> Javascript:<br/>
+        <span class="category"><i class="fa fa-code"></i> Javascript:</span><br/>
         <input type="checkbox" ng-model="filter['angular']" > Angular<br/>
         <input type="checkbox" ng-model="filter['ember']"> Ember.js<br/>
       </div>
       <div class="col-md-10" style="column-count: 3;">
         <!--Body content-->
         <h1><i class="fa fa-list"></i> Security Cheat Sheet</h1>
+        <h2 class="subtitle no-print">for developpers and security auditors</h2>
         <br/>
         <div>
-          <div ng-repeat="rule in filtered=(rules | filter:filterByFrameworks)">
-            <h3>{{rule.title}}</h3>
-            <p ng-bind-html="rule.descriptionHtml"></p>
-            <p class="no-print"><a href="{{rule.refUrl}}">{{rule.refUrl}}</a></p>
+          <div class="guideline" ng-repeat="g in filtered=(guidelines | filter:filterByFrameworks)">
+            <h3>{{g.title}}</h3>
+            <p ng-bind-html="g.descriptionHtml"></p>
+            <p class="no-print"><a href="{{g.refUrl}}">{{g.refUrl}}</a></p>
           <hr/>
           </div>
         </div>

@@ -43,7 +43,7 @@ The previous example assumed ASP.net 4+ and AntiXSS.
 
 
 
-    ["SQL Injection","sqli","
+    ["SQL - ADO.net","sqli","
 <table>
 <tr><td>Safe using prepared statement :  <td><pre><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = '\" + username + \"' and role='user'\");</code></pre>
 <tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to SQL injection : <td><pre class='insecure'><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = @username and role='user'\");<br/>
@@ -56,7 +56,7 @@ cmd.Parameters.AddWithValue(\"username\", username);</code></pre>
 
     ["OS Command","oscmd","
 <table>
-<tr><td>Safe using strict RegEx :  <td><pre><code>Regex rgx = new Regex(@\"^[a-zA-Z0-9]$\");<br/>
+<tr><td>Safe using strict RegEx :  <td><pre><code>Regex rgx = new Regex(@\"^[a-zA-Z0-9]+$\");<br/>
 if(rgx.IsMatch(input)) {<br/>
     Process p = new Process();<br/>
     p.StartInfo.FileName = \"exportLegacy.exe\";<br/>
@@ -79,15 +79,49 @@ Minimize the use of external command execution. Use programmatic API when possib
     ["LDAP","ldap","
 <code>DirectorySearcher ds = new DirectorySearcher(..)</code>
 <table>
-<tr><td>Filter :  <td><code>ds.Filter = \"(&(name=\" + Encoder.LdapFilterEncode(input) + \")(isPublic=true))\"</code>
+<tr><td>Filter encoded :  <td><code>ds.Filter = \"(&(name=\" + Encoder.LdapFilterEncode(input) + \")(isPublic=true))\"</code>
 <tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to LDAP injection : <td><code class='insecure'>ds.Filter = \"(&(name=\" + input + \")(isPublic=true))\"</code>
 </table>
 
 ","https://blogs.msdn.microsoft.com/securitytools/2010/09/30/antixss-4-0-released/"],
 
 
-    ["Sanitizing HTML","sanitizehtml","
 
+    ["XPath - Basic","xpath-basic","
+<table>
+<tr><td>Safe using strict RegEx  :  <td><pre><code>Regex rgx = new Regex(@\"^[a-zA-Z0-9]+$\");<br/>
+if(rgx.IsMatch(input)) {<br/>
+    XmlDocument doc = new XmlDocument();<br/>
+    doc.Load(\"/config.xml\");<br/>
+    ... = doc.SelectNodes(\"/Config/Devices/Device[id='\" + input + \"']\");<br/>
+}</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XPath injection : <td><pre class='insecure'><code>XmlDocument doc = new XmlDocument();<br/>
+doc.Load(\"/config.xml\");<br/>
+... = doc.SelectNodes(\"/Config/Devices/Device[id='\" + input + \"']\");</code></pre>
+</table>
+
+","https://www.owasp.org/index.php/XPATH_Injection"],
+
+
+
+    ["XPath - MvpXml","xpath-mvpxml","
+<table>
+<tr><td>Safe  :  <td><pre><code>XPathExpression expr = DynamicContext.Compile(\"/Config/Devices/Device[id=$inputId]\");<br/>
+<br/>
+DynamicContext ctx = new DynamicContext();<br/>
+ctx.AddVariable(\"inputId\", input);<br/>
+expr.SetContext(ctx);<br/>
+... = customers.Select(expr);</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XPath injection : <td><pre class='insecure'><code>
+XPathExpression expr = DynamicContext.Compile(\"/Config/Devices/Device[id=\" + input + \"]\");<br/>
+... = customers.Select(expr);</code></pre>
+</table>
+
+","http://weblogs.asp.net/cazzu/30888"],
+
+
+
+    ["Sanitizing HTML","sanitizehtml","
 <pre><code>class SomeRequest { //Request Data Object<br/>
     [AllowHtml]<br/>
     public string HtmlContent {get; set;};<br/>
@@ -98,6 +132,23 @@ public ActionResult AttributeHref(SomeRequest req) { //Controller method<br/>
     return View();<br/>
 }</code></pre>
     ","http://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/avoiding-cross-site-scripting-xss-attacks-with-antixss-in/"],
+
+
+
+    ["XML Parsing","xxe","
+<table>
+<tr><td>Safe  :  <td><pre><code>XmlReader reader = XmlReader.Create(uploadFile);</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XXE : <td><pre class='insecure'><code>XmlReaderSettings settings = new XmlReaderSettings();<br/>
+settings.DtdProcessing = DtdProcessing.Parse;<br/>
+XmlReader reader = XmlReader.Create(uploadFile, settings);</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XXE : <td><pre class='insecure'><code>XmlReaderSettings settings = new XmlReaderSettings();<br/>
+settings.ProhibitDtd = false;<br/>
+XmlReader reader = XmlReader.Create(uploadFile, settings);</code></pre>
+</table>
+
+","https://msdn.microsoft.com/en-us/magazine/ee335713.aspx"],
+
+
 
 
     ["Angular HTML","angular","
@@ -111,6 +162,7 @@ public ActionResult AttributeHref(SomeRequest req) { //Controller method<br/>
 
 Otherwise, AngularJS escape template by default.
     ","https://docs.angularjs.org/api/ng/service/$sce"],
+
 
 
     ["Ember.JS DOM","ember","

@@ -6,8 +6,25 @@ body {
 
 }
 
-h1, h3 {
+h1, h2, h3 {
     font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    color:#0074A3;
+}
+
+h2 {
+    color:#4D8DA8;
+}
+
+.subtitle {
+    margin-top:-10px;
+    font-style: italic;
+}
+
+.category {
+    font-weight: bold;
 }
 
 
@@ -32,5 +49,8 @@ code.insecure, pre.insecure {
     .no-print, .no-print *
     {
         display: none !important;
+    }
+    .guideline {
+        page-break-inside: avoid;
     }
 }

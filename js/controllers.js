@@ -5,11 +5,11 @@
 var app = angular.module('checklistApp', []);
 
 app.controller('DotNetChecklistCtrl', function($scope, $http, $sce) {
-    $scope.filter = {}; //
-    $scope.rules  = []; //Contains the descriptions and content for each rules
+    $scope.filter      = {}; //Selected frameworks
+    $scope.guidelines  = []; //Contains the descriptions and content for each rules
 
-    $scope.addRule = function (title, tag, descriptionHtml, ref) {
-        $scope.rules.push(
+    $scope.addGuideline = function (title, tag, descriptionHtml, ref) {
+        $scope.guidelines.push(
             {"title": title,
              "tag":tag,
              "descriptionHtml": $sce.trustAsHtml(descriptionHtml),
@@ -17,6 +17,7 @@ app.controller('DotNetChecklistCtrl', function($scope, $http, $sce) {
         );
     };
 
+    //Parsing that allow Multine string in JSON. It make it easier for maintenance
     function jsonSpecialParse(data) {
         return angular.fromJson(data.replace(/[\r\n]+/g, ''));
     }
@@ -31,7 +32,7 @@ app.controller('DotNetChecklistCtrl', function($scope, $http, $sce) {
         for (var i = 0; i < data.length; i++) {
             var item = data[i];
             //console.info(item);
-            $scope.addRule(item[0], item[1], item[2], item[3]);
+            $scope.addGuideline(item[0], item[1], item[2], item[3]);
         }
     });
 
@@ -45,8 +46,6 @@ app.controller('DotNetChecklistCtrl', function($scope, $http, $sce) {
     }
 
     $scope.filterByFrameworks = function (item) { //http://stackoverflow.com/a/23983570/89769
-
-        console.info(item);
         if($scope.filter[item.tag]) {
             return true;
         }
