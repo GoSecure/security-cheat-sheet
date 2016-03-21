@@ -2,14 +2,14 @@
 <html lang="en" ng-app="checklistApp">
 <head>
   <meta charset="utf-8">
-  <title>Checklist</title>
+  <title>Security Cheat Sheet</title>
+
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/app.css">
   <script src="js/angular.js"></script>
   <script src="js/controllers.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
-
 
 </head>
 <body ng-controller="DotNetChecklistCtrl">
@@ -36,7 +36,7 @@
       </div>
       <div class="col-md-10" style="column-count: 3;">
         <!--Body content-->
-        <h1><i class="fa fa-list"></i> ASP.net Security Cheatsheet</h1>
+        <h1><i class="fa fa-list"></i> Security Cheat Sheet</h1>
         <br/>
         <div>
           <div ng-repeat="rule in filtered=(rules | filter:filterByFrameworks)">
@@ -46,7 +46,7 @@
           <hr/>
           </div>
         </div>
-        <div>Cheatsheet created by <a href="http://gosecure.ca">GoSecure</a> release under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons</a></div>
+        <div><small>Cheatsheet created by <a href="http://gosecure.ca">GoSecure</a> release under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons</a></small></div>
       </div>
     </div>
   </div>

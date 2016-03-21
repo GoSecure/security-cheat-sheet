@@ -2,6 +2,8 @@
 
 body {
   padding-top: 20px;
+  
+
 }
 
 h1, h3 {
@@ -16,17 +18,13 @@ td {
     padding:5px;
 }
 
-code {
+code, pre {
     background-color:#e7feea;
     color:#333;
 }
-code.insecure {
+code.insecure, pre.insecure {
     background-color:#f9f2f4;
     color: #c7254e;
-}
-
-pre {
-    background-color:#e7feea;
 }
 
 @media print
