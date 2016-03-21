@@ -4,7 +4,7 @@
 
 var app = angular.module('checklistApp', []);
 
-app.controller('DotNetChecklistCtrl', function($scope, $http, $sce) {
+app.controller('SecurityChecklistCtrl', function($scope, $http, $sce) {
     $scope.filter      = {}; //Selected frameworks
     $scope.guidelines  = []; //Contains the descriptions and content for each rules
 

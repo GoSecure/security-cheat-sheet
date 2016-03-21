@@ -1,16 +1,16 @@
 [
     ["Manual HTML/XML construction","manualenc","
 <table>
-<tr><td>HTML :         <td><code>AntiXssEncoder.HtmlEncode(value)</code>
-<tr><td>Form (POST Parameter) : <td><code>\"postParam=\"+AntiXssEncoder.HtmlFormEncode(value)</code>
-<tr><td>CSS :          <td><code>AntiXssEncoder.CssEncode(value)</code>
-<tr><td>URL :          <td><code>\"http://example.com/?value=\"+AntiXssEncoder.UrlEncode(value)</code>
-<tr><td>XML attribute: <td><code>\"test='\"+AntiXssEncoder.XmlAttributeEncode(value)+\"'\"</code>
-<tr><td>XML element :  <td><code>\"&lt;foo&gt;\"+AntiXssEncoder.XmlEncode(value)+\"&lt;/foo&gt;\"</code>
-<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS / XML injection : <td><code class='insecure'>\"&lt;foo&gt;\"+value+\"&lt;/foo&gt;\"</code>
+<tr><td>HTML :         <td><code>Encoder.HtmlEncode(value)</code>
+<tr><td>Form (POST Parameter) : <td><code>\"postParam=\" + Encoder.HtmlFormEncode(value)</code>
+<tr><td>CSS :          <td><code>Encoder.CssEncode(value)</code>
+<tr><td>URL :          <td><code>\"http://example.com/?value=\" + Encoder.UrlEncode(value)</code>
+<tr><td>XML attribute: <td><code>\"test='\" + Encoder.XmlAttributeEncode(value) + \"'\"</code>
+<tr><td>XML element :  <td><code>\"&lt;foo&gt;\" + Encoder.XmlEncode(value) + \"&lt;/foo&gt;\"</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS / XML injection : <td><code class='insecure'>\"&lt;foo&gt;\" + value + \"&lt;/foo&gt;\"</code>
 </table>
 <br/>
-AntiXSS is included in .NET version 4.
+Require the using statement <code>using Microsoft.Security.Application;</code>.
 ","https://msdn.microsoft.com/en-us/library/system.web.security.antixss.antixssencoder(v=vs.110).aspx"],
 
 
@@ -38,7 +38,7 @@ Require the using statement <code>@using Microsoft.Security.Application</code> f
 <tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS : <td><code class='insecure'>Hello <%= MyValue =></code>
 </table>
 
-The previous example assumed ASP.net 4+ and AntiXSS.
+The previous example assumed ASP.net 4+ or AntiXSS dependency is available.
 ","http://haacked.com/archive/2011/01/06/razor-syntax-quick-reference.aspx/"],
 
 
