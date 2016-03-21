@@ -46,9 +46,11 @@ app.controller('SecurityChecklistCtrl', function($scope, $http, $sce) {
     //Loading guildelines
     var transformers = {transformResponse: function(d, h) { return jsonSpecialParse(d); }}
 
-    $http.get('data/dot_net.json',transformers).success(loadJson);
-    $http.get('data/javascript.json',transformers).success(loadJson);
-
+    $http.get('data/dot_net.json',transformers).success(loadJson).success(
+        function() {
+            $http.get('data/javascript.json',transformers).success(loadJson);
+        }
+    );
 
 
     //////////////////////////
