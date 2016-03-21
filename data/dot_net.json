@@ -146,32 +146,6 @@ settings.ProhibitDtd = false;<br/>
 XmlReader reader = XmlReader.Create(uploadFile, settings);</code></pre>
 </table>
 
-","https://msdn.microsoft.com/en-us/magazine/ee335713.aspx"],
+","https://msdn.microsoft.com/en-us/magazine/ee335713.aspx"]
 
-
-
-
-    ["Angular HTML","angular","
-
-<i class=\"fa fa-exclamation-triangle\"></i> Marked HTML as safe to be place in \"ng-bind-html\"<br/>
-<code class='insecure'>$sce.trustAsHtml(userHtml)</code>
-
-<br/>
-<i class=\"fa fa-exclamation-triangle\"></i> Unescaped HTML with old Angular version<br/>
-<code class='insecure'>&lt;div ng-bind-html-unsafe=\"userHtml\"&gt;&lt;/div&gt;</code><br/>
-
-Otherwise, AngularJS escape template by default.
-    ","https://docs.angularjs.org/api/ng/service/$sce"],
-
-
-
-    ["Ember.JS DOM","ember","
-Loading HTML including user values:
-<pre><code>
-export default Ember.Helper.helper(function(params) {<br/>
-  return Ember.String.htmlSafe('&lt;b&gt;${params[0]}&lt;/b&gt;');<br/>
-});<br/>
-</code></pre>
-    ","https://guides.emberjs.com/v2.0.0/templates/writing-helpers/#toc_escaping-html-content
-"]
 ]
