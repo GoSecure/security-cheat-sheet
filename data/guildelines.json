@@ -1,0 +1,90 @@
+[
+    ["Manual HTML/XML construction","manualenc","
+<table>
+<tr><td>HTML :         <td><code>AntiXssEncoder.HtmlEncode(value)</code>
+<tr><td>Form (POST Parameter) : <td><code>\"postParam=\"+AntiXssEncoder.HtmlFormEncode(value)</code>
+<tr><td>CSS :          <td><code>AntiXssEncoder.CssEncode(value)</code>
+<tr><td>URL :          <td><code>\"http://example.com/?value=\"+AntiXssEncoder.UrlEncode(value)</code>
+<tr><td>XML attribute: <td><code>\"test='\"+AntiXssEncoder.XmlAttributeEncode(value)+\"'\"</code>
+<tr><td>XML element :  <td><code>\"&lt;foo&gt;\"+AntiXssEncoder.XmlEncode(value)+\"&lt;/foo&gt;\"</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS / XML injection : <td><code class='insecure'>\"&lt;foo&gt;\"+value+\"&lt;/foo&gt;\"</code>
+</table>
+<br/>
+AntiXSS is included in .NET version 4.
+","https://msdn.microsoft.com/en-us/library/system.web.security.antixss.antixssencoder(v=vs.110).aspx"],
+
+
+    ["Razor templates","razor","
+<table>
+<tr><td>HTML :         <td><code>Hello @MyValue</code>
+<tr><td>CSS :          <td><code>h1 {color: @Html.Raw(Encoder.CssEncode(MyColor)) }</code>
+<tr><td>JavaScript :   <td><code>&lt;script&gt;var risky = @Html.Raw(Encoder.JavaScriptEncode(MyScriptVar))&lt;/script&gt;</code>
+<tr><td>URL :          <td><code>@Html.ActionLink(\"Click me\", null, null, null, new { href = \"http://example.com/?value=\"+Encoder.UrlEncode(value) })</code>
+<tr><td>Attribute :    <td><code>&lt;img alt=\"@MyAttribute\" src=\"image.jpg\"/&gt;</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS : <td><code class='insecure'>Hello @Html.Raw(MyValue)</code>
+</table>
+<br/>
+Require the using statement <code>@using Microsoft.Security.Application</code> for context specific encoding.
+","http://haacked.com/archive/2011/01/06/razor-syntax-quick-reference.aspx/"],
+
+
+    ["Web Forms","webforms","
+<table>
+<tr><td>HTML :         <td><code>Hello <%: MyValue :></code>
+<tr><td>CSS :          <td><code>h1 {color: <%= Encoder.CssEncode(MyColor)) =></code>
+<tr><td>JavaScript :   <td><code>&lt;script&gt;var risky = <%= Encoder.JavaScriptEncode(MyScriptVar) =>&lt;/script&gt;</code>
+<tr><td>URL :          <td><code>&lt;a href = \"http://example.com/?value=<%= Encoder.UrlEncode(value) =>\"&gt;</code>
+<tr><td>Attribute :    <td><code>&lt;img alt=\"<%: MyAttribute :>\"/&gt;</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS : <td><code class='insecure'>Hello <%= MyValue =></code>
+</table>
+
+The previous example assumed ASP.net 4+ and AntiXSS.
+","http://haacked.com/archive/2011/01/06/razor-syntax-quick-reference.aspx/"],
+
+    ["LDAP","ldap","
+<code>DirectorySearcher ds = new DirectorySearcher(..)</code>
+<table>
+<tr><td>Filter :  <td><code>ds.Filter = \"(&(name=\"+Encoder.LdapFilterEncode(input)+\")(isPublic=true))\"</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to LDAP injection : <td><code class='insecure'>ds.Filter = \"(&(name=\"+input+\")(isPublic=true))\"</code>
+</table>
+
+","https://blogs.msdn.microsoft.com/securitytools/2010/09/30/antixss-4-0-released/"],
+
+
+    ["Sanitizing HTML","sanitizehtml","
+
+<pre><code>class SomeRequest { //Request Data Object<br/>
+    [AllowHtml]<br/>
+    public string HtmlContent {get; set;};<br/>
+}</code></pre>
+<pre><code>
+public ActionResult AttributeHref(SomeRequest req) { //Controller method<br/>
+    ViewBag.DisplayedHtml = Sanitizer.GetSafeHtmlFragment(req.HtmlContent);<br/>
+    return View();<br/>
+}</code></pre>
+    ","http://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/avoiding-cross-site-scripting-xss-attacks-with-antixss-in/"],
+
+
+    ["Angular HTML","angular","
+
+<i class=\"fa fa-exclamation-triangle\"></i> Marked HTML as safe to be place in \"ng-bind-html\"<br/>
+<code class='insecure'>$sce.trustAsHtml(userHtml)</code>
+
+<br/>
+<i class=\"fa fa-exclamation-triangle\"></i> Unescaped HTML with old Angular version<br/>
+<code class='insecure'>&lt;div ng-bind-html-unsafe=\"userHtml\"&gt;&lt;/div&gt;</code><br/>
+
+Otherwise, AngularJS escape template by default.
+    ","https://docs.angularjs.org/api/ng/service/$sce"],
+
+
+    ["Ember.JS DOM","ember","
+Loading HTML including user values:
+<pre><code>
+export default Ember.Helper.helper(function(params) {<br/>
+  return Ember.String.htmlSafe('&lt;b&gt;${params[0]}&lt;/b&gt;');<br/>
+});<br/>
+</code></pre>
+    ","https://guides.emberjs.com/v2.0.0/templates/writing-helpers/#toc_escaping-html-content
+"]
+]

@@ -1,0 +1,38 @@
+/* app css stylesheet */
+
+body {
+  padding-top: 20px;
+}
+
+h1, h3 {
+    font-family: 'Raleway', sans-serif;
+}
+
+
+table, th, td {
+    border: 1px solid #CCC;
+}
+td {
+    padding:5px;
+}
+
+code {
+    background-color:#e7feea;
+    color:#333;
+}
+code.insecure {
+    background-color:#f9f2f4;
+    color: #c7254e;
+}
+
+pre {
+    background-color:#e7feea;
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

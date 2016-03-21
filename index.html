@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" ng-app="checklistApp">
+<head>
+  <meta charset="utf-8">
+  <title>Checklist</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/angular.js"></script>
+  <script src="js/controllers.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:700' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body ng-controller="DotNetChecklistCtrl">
+
+  <div class="container-fluid" style="column-count: 3;">
+    <div class="row">
+      <div class="col-md-2 no-print">
+        Generate a cheatsheet specific for the technology your team used.<br/>
+        <br/>
+        <i class="fa fa-code"></i> .NET:<br/>
+        <input type="checkbox" ng-model="filter['manualenc']" > Manual encoding<br/>
+        <input type="checkbox" ng-model="filter['razor']"> Razor (.cshtml/.vbhtml)<br/>
+        <input type="checkbox" ng-model="filter['webforms']"> Web Forms (.aspx)<br/>
+        <input type="checkbox" ng-model="filter['sanitizehtml']"> HTML Sanitization<br/>
+        <input type="checkbox" ng-model="filter['sqli']"> SQL<br/>
+        <input type="checkbox" ng-model="filter['oscmd']"> OS Command<br/>
+        <input type="checkbox" ng-model="filter['ldap']"> LDAP Queries<br/>
+        <input type="checkbox" ng-model="filter['xpath']"> XPath<br/>
+        <input type="checkbox" ng-model="filter['xxe']"> XML parsing (XXE)<br/>
+        <br/>
+        <i class="fa fa-code"></i> Javascript:<br/>
+        <input type="checkbox" ng-model="filter['angular']" > Angular<br/>
+        <input type="checkbox" ng-model="filter['ember']"> Ember.js<br/>
+      </div>
+      <div class="col-md-10" style="column-count: 3;">
+        <!--Body content-->
+        <h1><i class="fa fa-list"></i> ASP.net Security Cheatsheet</h1>
+        <br/>
+        <div>
+          <div ng-repeat="rule in filtered=(rules | filter:filterByFrameworks)">
+            <h3>{{rule.title}}</h3>
+            <p ng-bind-html="rule.descriptionHtml"></p>
+            <p class="no-print"><a href="{{rule.refUrl}}">{{rule.refUrl}}</a></p>
+          <hr/>
+          </div>
+        </div>
+        <div>Cheatsheet created by <a href="http://gosecure.ca">GoSecure</a> release under <a href="https://creativecommons.org/licenses/by/3.0/">Creative Commons</a></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
