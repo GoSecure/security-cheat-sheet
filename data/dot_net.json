@@ -45,9 +45,9 @@ The previous example assumed ASP.net 4+ or AntiXSS dependency is available.
 
     ["SQL - ADO.net","sqli","
 <table>
-<tr><td>Safe using prepared statement :  <td><pre><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = '\" + username + \"' and role='user'\");</code></pre>
-<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to SQL injection : <td><pre class='insecure'><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = @username and role='user'\");<br/>
+<tr><td>Safe using prepared statement :  <td><pre><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = @username and role='user'\");<br/>
 cmd.Parameters.AddWithValue(\"username\", username);</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to SQL injection : <td><pre class='insecure'><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = '\" + username + \"' and role='user'\");</code></pre>
 </table>
 
 ",""],
