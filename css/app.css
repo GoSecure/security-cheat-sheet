@@ -44,6 +44,14 @@ code.insecure, pre.insecure {
     color: #c7254e;
 }
 
+.filter_box {
+    padding-top:5px;
+    padding-bottom:10px;
+    background-color: #FFFFFF;
+    border:1px solid #DDDDDD;
+    box-shadow: 5px 5px 2px #DDDDDD;
+}
+
 @media print
 {    
     .no-print, .no-print *

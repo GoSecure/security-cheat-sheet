@@ -16,11 +16,13 @@
 
   <div class="container-fluid" style="column-count: 3;">
     <div class="row">
-      <div class="col-md-2 no-print">
+      <div class="col-md-2 no-print filter_box">
+        <h3>Filters</h3>
+
         Generate a cheat sheet specific for the technologies your development team used.<br/>
         <br/>
         <span class="category"><i class="fa fa-code"></i> .NET:</span><br/>
-        <input type="checkbox" ng-model="filter['manualenc']" > Manual encoding<br/>
+        <input type="checkbox" ng-model="filter['manualenc']" > Manual XML construction<br/>
         <input type="checkbox" ng-model="filter['razor']"> Razor (.cshtml/.vbhtml)<br/>
         <input type="checkbox" ng-model="filter['webforms']"> Web Forms (.aspx)<br/>
         <input type="checkbox" ng-model="filter['sanitizehtml']"> HTML Sanitization<br/>
@@ -28,23 +30,31 @@
         <input type="checkbox" ng-model="filter['oscmd']"> OS Command<br/>
         <input type="checkbox" ng-model="filter['ldap']"> LDAP Queries<br/>
         <input type="checkbox" ng-model="filter['xpath-basic']"> XPath<br/>
-        <input type="checkbox" ng-model="filter['xpath-mvpxml']"> XPath MvpXml<br/>
+        <input type="checkbox" ng-model="filter['xpath-mvpxml']"> XPath - MvpXml<br/>
         <input type="checkbox" ng-model="filter['xxe']"> XML parsing (XXE)<br/>
         <br/>
         <span class="category"><i class="fa fa-code"></i> Javascript:</span><br/>
         <input type="checkbox" ng-model="filter['angular']" > Angular<br/>
         <input type="checkbox" ng-model="filter['ember']"> Ember.js<br/>
         <br/>
-        Follow the project:<br/>
+
+
+        <hr/>
+
         <iframe class="github-btn"
                 src="http://ghbtns.com/github-btn.html?user=gosecure&repo=security-cheat-sheet&type=watch&count=true"
                 allowtransparency="true" frameborder="0" scrolling="0" width="100px"
-                height="20px"></iframe>
-        <br/>
+                height="20px"></iframe><br/>
         <iframe class="github-btn"
                 src="http://ghbtns.com/github-btn.html?user=gosecure&repo=security-cheat-sheet&type=fork&count=true"
                 allowtransparency="true" frameborder="0" scrolling="0" width="102px"
                 height="20px"></iframe>
+
+
+        <hr/>
+
+        Found an error or want to contribute new ideas? <a target="_blank" href="https://github.com/GoSecure/security-cheat-sheet">Visit the GitHub project</a><br/>
+
 
       </div>
       <div class="col-md-10" style="column-count: 3;">

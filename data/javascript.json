@@ -13,7 +13,7 @@ Otherwise, AngularJS escape template by default.
 
 
 
-    ["Ember.JS DOM","ember","
+    ["Ember.js HTML","ember","
 Loading HTML including user values:
 <pre><code>
 export default Ember.Helper.helper(function(params) {<br/>

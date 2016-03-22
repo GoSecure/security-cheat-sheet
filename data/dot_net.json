@@ -50,7 +50,7 @@ cmd.Parameters.AddWithValue(\"username\", username);</code></pre>
 <tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to SQL injection : <td><pre class='insecure'><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = '\" + username + \"' and role='user'\");</code></pre>
 </table>
 
-",""],
+","https://msdn.microsoft.com/en-us/library/system.data.sqlclient.sqlcommand(v=vs.110).aspx"],
 
 
 
