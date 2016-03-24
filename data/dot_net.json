@@ -43,7 +43,7 @@ The previous example assumed ASP.net 4+ or AntiXSS dependency is available.
 
 
 
-    ["SQL - ADO.net","sqli","
+    ["SQL - ADO.net","sql-ado","
 <table>
 <tr><td>Safe using prepared statement :  <td><pre><code>var cmd = new SqlCommand(\"SELECT * FROM Users WHERE username = @username and role='user'\");<br/>
 cmd.Parameters.AddWithValue(\"username\", username);</code></pre>
@@ -51,6 +51,23 @@ cmd.Parameters.AddWithValue(\"username\", username);</code></pre>
 </table>
 
 ","https://msdn.microsoft.com/en-us/library/system.data.sqlclient.sqlcommand(v=vs.110).aspx"],
+
+
+
+    ["SQL - LINQ","sql-linq","
+<table>
+<tr><td>Safe using LINQ to SQL :  <td><pre><code>var query = from user in db.Users<br/>
+where user.UserId == inputId<br/>
+select user;</code></pre>
+<tr><td>Safe using prepared statement :  <td><pre><code>db.ExecuteQuery<User>(@\"SELECT * 
+FROM dbo.Users<br/>
+WHERE UserId = {0} AND group = 5\", inputId);</code></pre>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to SQL injection : <td>
+<pre class='insecure'><code>db.ExecuteQuery<User>(@\"SELECT * FROM dbo.Users<br/>
+WHERE UserId = \" + inputId + \" AND group = 5\");</code></pre>
+</table>
+
+","https://msdn.microsoft.com/en-us/library/bb546192(v=vs.110).aspx"],
 
 
 

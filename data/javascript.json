@@ -20,6 +20,23 @@ export default Ember.Helper.helper(function(params) {<br/>
   return Ember.String.htmlSafe('&lt;b&gt;${params[0]}&lt;/b&gt;');<br/>
 });<br/>
 </code></pre>
-    ","https://guides.emberjs.com/v2.0.0/templates/writing-helpers/#toc_escaping-html-content
-"]
+    ","https://guides.emberjs.com/v2.0.0/templates/writing-helpers/#toc_escaping-html-content"],
+
+
+    ["Purify HTML","purify","
+Loading HTML including user values:
+<table>
+<tr><td>Safe :  <td><code>
+div.innerHTML = DOMPurify.sanitize(userHTML);
+</code>
+<tr><td>Safe :  <td><code>
+div.innerHTML = DOMPurify.sanitize(\"&lt;img src='\" + userUrl + \"' alt='..'&gt;\");
+</code>
+<tr><td><i class=\"fa fa-exclamation-triangle\"></i> Vulnerable to XSS : <td>
+<code class='insecure'>
+div.innerHTML = \"&lt;img src='\" + DOMPurify.sanitize(userUrl) + \"' alt='..'&gt;\";
+</code>
+</table>
+    ","https://github.com/cure53/DOMPurify"]
+
 ]
