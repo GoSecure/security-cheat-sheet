@@ -8,9 +8,8 @@
 <i class=\"fa fa-exclamation-triangle\"></i> Unescaped HTML with old Angular version<br/>
 <code class='insecure'>&lt;div ng-bind-html-unsafe=\"userHtml\"&gt;&lt;/div&gt;</code><br/>
 
-Otherwise, AngularJS escape template by default.
+Otherwise, AngularJS escape special characters by default.
     ","https://docs.angularjs.org/api/ng/service/$sce"],
-
 
 
     ["Ember.js HTML","ember","
@@ -23,7 +22,7 @@ export default Ember.Helper.helper(function(params) {<br/>
     ","https://guides.emberjs.com/v2.0.0/templates/writing-helpers/#toc_escaping-html-content"],
 
 
-    ["Purify HTML","purify","
+    ["DOMPurify HTML","dompurify","
 Loading HTML including user values:
 <table>
 <tr><td>Safe :  <td><code>
